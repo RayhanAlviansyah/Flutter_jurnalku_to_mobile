@@ -97,7 +97,7 @@ class SettingAccount extends StatelessWidget {
             CircleAvatar(
               radius: 18,
               backgroundColor: Colors.red,
-              backgroundImage: AssetImage('assets/images/profile.jpg'),
+              backgroundImage: AssetImage('assets/images/profile_2.jpg'),
             ),
           ],
         ),
@@ -158,7 +158,7 @@ class SettingAccount extends StatelessWidget {
                             CircleAvatar(
                               radius: 50,
                               backgroundColor: Colors.white,
-                              backgroundImage: AssetImage('assets/images/profile.jpg'),
+                              backgroundImage: AssetImage('assets/images/profile_2.jpg'),
                             ),
                             Positioned(
                               bottom: 0,
