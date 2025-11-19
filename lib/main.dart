@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projek_jurnalku_to_mobile/Panduan_Pengguna.dart';
 import 'package:projek_jurnalku_to_mobile/setting_account.dart';
 
 void main() {
@@ -12,9 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home:  SettingAccount(),
+      title: 'Jurnalku',
+      home: PanduanPage(),
     );
   }
 }
+
