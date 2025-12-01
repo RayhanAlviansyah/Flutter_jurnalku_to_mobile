@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projek_jurnalku_to_mobile/catatan_sikap.dart';
+import 'package:projek_jurnalku_to_mobile/profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: Catatan(),
+      home: profile(),
     );
   }
 }
+
