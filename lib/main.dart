@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projek_jurnalku_to_mobile/Panduan_Pengguna.dart';
-import 'package:projek_jurnalku_to_mobile/setting_account.dart';
+import 'package:projek_jurnalku_to_mobile/explore.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,13 +8,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Jurnalku',
-      home: PanduanPage(),
+      title: 'Flutter Demo',
+      home: Explore(),
     );
   }
 }
