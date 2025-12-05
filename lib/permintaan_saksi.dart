@@ -9,6 +9,12 @@ class Saksi extends StatefulWidget {
 }
 
 class _SaksiState extends State<Saksi> {
+  List<Map<String, String>> dummyRequests = [
+    {"sender": "King", "date": "12 Desember 2025"},
+    {"sender": "Rafi", "date": "10 Desember 2025"},
+    {"sender": "Dafa", "date": "09 Desember 2025"},
+  ];
+
   @override
   Widget build(BuildContext context) {
     String formattedDate = DateFormat("EEEE, dd MMMM yyyy", "en_US")
@@ -20,7 +26,6 @@ class _SaksiState extends State<Saksi> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: const Icon(Icons.home, color: Colors.black, size: 22),
-
         actions: [
           Row(
             children: const [
@@ -51,7 +56,6 @@ class _SaksiState extends State<Saksi> {
             ],
           ),
         ],
-
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Container(
@@ -106,15 +110,17 @@ class _SaksiState extends State<Saksi> {
             const SizedBox(height: 20),
 
             Expanded(
-              child: ListView(
-                children: [
-                  _buildRequestCard(
-                    sender: "Belum ada permintaan",
-                    date: "",
-                    empty: true,
-                  ),
-                ],
-              ),
+              child: dummyRequests.isEmpty
+                  ? _emptyView()
+                  : ListView.builder(
+                      itemCount: dummyRequests.length,
+                      itemBuilder: (context, index) {
+                        return _buildExpansionTile(
+                          sender: dummyRequests[index]["sender"]!,
+                          date: dummyRequests[index]["date"]!,
+                        );
+                      },
+                    ),
             ),
           ],
         ),
@@ -122,111 +128,124 @@ class _SaksiState extends State<Saksi> {
     );
   }
 
-  Widget _buildRequestCard({
+  Widget _emptyView() {
+    return Container(
+      alignment: Alignment.center,
+      margin: const EdgeInsets.only(top: 50),
+      child: Column(
+        children: [
+          Icon(Icons.group, size: 40, color: Colors.grey.shade500),
+          const SizedBox(height: 10),
+          const Text(
+            "Belum ada permintaan",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey,
+            ),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            "Belum ada yang mengirim permintaan saksi kepada Anda",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 13,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildExpansionTile({
     required String sender,
     required String date,
-    bool empty = false,
   }) {
-    if (empty) {
-      return Container(
-        alignment: Alignment.center,
-        margin: const EdgeInsets.only(top: 50),
-        child: Column(
-          children: [
-            Icon(Icons.group, size: 40, color: Colors.grey.shade500),
-            const SizedBox(height: 10),
-            const Text(
-              "Belum ada permintaan",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 6),
-            const Text(
-              "Belum ada yang mengirim permintaan saksi kepada Anda",
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 13,
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      margin: const EdgeInsets.only(bottom: 6),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(6),
         border: Border.all(color: Colors.grey.shade300),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 2,
+            offset: const Offset(0, 1),
           )
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          tilePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+          childrenPadding:
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+
+          title: Text(
             sender,
             style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
             ),
           ),
 
-          const SizedBox(height: 4),
-
-          Text(
+          subtitle: Text(
             date,
             style: TextStyle(
-              fontSize: 13,
               color: Colors.grey[700],
+              fontSize: 11,
             ),
           ),
 
-          const SizedBox(height: 12),
-
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 8),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 28,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      print("Terima dari $sender");
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                    child: const Text(
+                      "Terima",
+                      style: TextStyle(fontSize: 11, color: Colors.white),
+                    ),
                   ),
                 ),
-                child:
-                    const Text("Terima", style: TextStyle(color: Colors.white)),
-              ),
-              const SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 8),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
+                const SizedBox(width: 6),
+                SizedBox(
+                  height: 28,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      print("Tolak dari $sender");
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                    child: const Text(
+                      "Tolak",
+                      style: TextStyle(fontSize: 11, color: Colors.white),
+                    ),
                   ),
                 ),
-                child:
-                    const Text("Tolak", style: TextStyle(color: Colors.white)),
-              ),
-            ],
-          )
-        ],
+              ],
+            ),
+            const SizedBox(height: 4),
+          ],
+        ),
       ),
     );
   }
