@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Widgets/custom_appbar.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -7,6 +8,7 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
             backgroundColor: Colors.white,
+            
       appBar: PreferredSize(
   preferredSize: Size.fromHeight(50),
   child: Container(
@@ -20,55 +22,8 @@ class Dashboard extends StatelessWidget {
         ),
       ],
     ),
-    child:  AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            Padding(padding: EdgeInsetsGeometry.all(10)),
-            Icon(Icons.home_outlined, color: Colors.black87),
-            SizedBox(width: 12),
+    child: CustomAppBar(),
 
-            Spacer(),
-
-            // Name + Class
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Name',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
-                ),
-
-                Text(
-                  'PPLG XII-3',
-                  style:
-                  TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
-                  ),
-                )
-              ],
-            ),
-
-            SizedBox(width: 10),
-
-            CircleAvatar(
-              radius: 18,
-              backgroundColor: Colors.red,
-              backgroundImage: AssetImage('assets/images/profile_2.jpg'),
-            ),
-
-            SizedBox(width: 10,
-            child: Icon(Icons.arrow_drop_down,),),
-          ],
-        ),
-      ),
   ),
 ),
 
@@ -311,373 +266,323 @@ body: SingleChildScrollView(
 
             SizedBox(height: 20),
 
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey,width:0.5),
-                borderRadius: BorderRadius.circular(10),
+Container(
+  width: double.infinity,
+  decoration: BoxDecoration(
+    border: Border.all(color: Colors.grey, width: 0.5),
+    borderRadius: BorderRadius.circular(10),
+  ),
+  padding: EdgeInsets.all(10),
+  child: Column(
+    children: [
+      // ================= PROFILE =================
+      GestureDetector(
+        behavior: HitTestBehavior.opaque,        // <- FIX UTAMA
+        onTap: () => Navigator.pushNamed(context, '/profile'),
+        child: Container(
+          width: double.infinity,               // <- pastikan full area
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: Color.fromARGB(50, 64, 195, 255),
+                child: Icon(Icons.person_outline_rounded,
+                    color: Colors.lightBlue, size: 30),
               ),
-
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                    CircleAvatar(
-                  radius: 25,
-                  backgroundColor: const Color.fromARGB(50, 64, 195, 255),
-                  child: Icon(
-                    Icons.person_outline_rounded,
-                    color: Colors.lightBlue,
-                    size: 30,
-                  )
-                              ),
-                  
-                              Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Profile',
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Profile',
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                  
-                      Text(
-                        'Lihat dan kelola profile dirimu di sini ',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                              ),
-                  
-                              Spacer(),
-                  
-                              Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.blue,
-                  size: 20,
-                              ),
-                    ],
-                  ),
-
-                  Divider(color: Colors.grey),
-
-                  Row(
-                    children: [
-                    CircleAvatar(
-                  radius: 25,
-                  backgroundColor: const Color.fromARGB(50, 64, 195, 255),
-                  child: Icon(
-                    Icons.work_outline_rounded,
-                    color: Colors.lightBlue,
-                    size: 30,
-                  )
-                              ),
-                  
-                              Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'portofolio',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                  
-                      Text(
-                        'Lihat dan kelola portofolio kompotensimu di sini. ',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                              ),
-                  
-                              Spacer(),
-                  
-                              Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.blue,
-                  size: 20,
-                              ),
-                    ],
-                  ),
-
-                  Divider(color: Colors.grey),
-
-                  Row(
-                    children: [
-                    CircleAvatar(
-                  radius: 25,
-                  backgroundColor: const Color.fromARGB(50, 64, 195, 255),
-                  child: Icon(
-                    Icons.star_border,
-                    color: Colors.lightBlue,
-                    size: 30,
-                  )
-                              ),
-                  
-                              Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Sertifikat',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                  
-                      Text(
-                        'Lihat dan unduh sertifikat kompetensimu di sini. ',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                              ),
-                  
-                              Spacer(),
-                  
-                              Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.blue,
-                  size: 20,
-                              ),
-                    ],
-                  ),
-                ],
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black)),
+                    Text(
+                      'Lihat dan kelola profile dirimu di sini ',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              Spacer(),
+              Icon(Icons.arrow_forward_ios_rounded,
+                  color: Colors.blue, size: 20),
+            ],
+          ),
+        ),
+      ),
+
+      Divider(color: Colors.grey),
+
+      // ================= PORTOFOLIO =================
+      GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.pushNamed(context, '/profile'),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: Color.fromARGB(50, 64, 195, 255),
+                child: Icon(Icons.work_outline_rounded,
+                    color: Colors.lightBlue, size: 30),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Portofolio',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black)),
+                    Text(
+                      'Lihat dan kelola portofolio kompotensimu di sini.',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Icon(Icons.arrow_forward_ios_rounded,
+                  color: Colors.blue, size: 20),
+            ],
+          ),
+        ),
+      ),
+
+      Divider(color: Colors.grey),
+
+      // ================= SERTIFIKAT =================
+      GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.pushNamed(context, '/profile'),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: Color.fromARGB(50, 64, 195, 255),
+                child: Icon(Icons.star_border,
+                    color: Colors.lightBlue, size: 30),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Sertifikat',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black)),
+                    Text(
+                      'Lihat dan unduh sertifikat kompetensimu di sini.',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Icon(Icons.arrow_forward_ios_rounded,
+                  color: Colors.blue, size: 20),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+  
+),
 
             SizedBox(height: 40),
 
-                        Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey,width:0.5),
-                borderRadius: BorderRadius.circular(10),
+Container(
+  width: double.infinity,
+  decoration: BoxDecoration(
+    border: Border.all(color: Colors.grey, width: 0.5),
+    borderRadius: BorderRadius.circular(10),
+  ),
+  padding: EdgeInsets.all(10),
+  child: Column(
+    children: [
+      // ================= JURNAL PEMBIASAAN =================
+      GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.pushNamed(context, '/jurnal_pembiasaan'),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: Color.fromARGB(50, 64, 195, 255),
+                child: Icon(Icons.menu_book_outlined,
+                    color: Colors.lightBlue, size: 30),
               ),
-
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                    CircleAvatar(
-                  radius: 25,
-                  backgroundColor: const Color.fromARGB(50, 64, 195, 255),
-                  child: Icon(
-                    Icons.menu_book_outlined,
-                    color: Colors.lightBlue,
-                    size: 30,
-                  )
-                              ),
-                  
-                              Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Jurnal Pembiasaan',
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Jurnal Pembiasaan',
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                  
-                      Text(
-                        'Catat dan pantau kegiatan pembiasaan harianmu',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                              ),
-                  
-                              Spacer(),
-                  
-                              Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.blue,
-                  size: 20,
-                              ),
-                    ],
-                  ),
-
-                  Divider(color: Colors.grey),
-
-                  Row(
-                    children: [
-                    CircleAvatar(
-                  radius: 25,
-                  backgroundColor: const Color.fromARGB(50, 64, 195, 255),
-                  child: Icon(
-                    Icons.person_outline_rounded,
-                    color: Colors.lightBlue,
-                    size: 30,
-                  )
-                              ),
-                  
-                              Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Permintaan Saksi',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                  
-                      Text(
-                        'Lihat teman yang mengajukan permintaan saksi. ',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                              ),
-                  
-                              Spacer(),
-                  
-                              Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.blue,
-                  size: 20,
-                              ),
-                    ],
-                  ),
-
-                  Divider(color: Colors.grey),
-
-                  Row(
-                    children: [
-                    CircleAvatar(
-                  radius: 25,
-                  backgroundColor: const Color.fromARGB(50, 64, 195, 255),
-                  child: Icon(
-                    Icons.insights_outlined,
-                    color: Colors.lightBlue,
-                    size: 30,
-                  )
-                              ),
-                  
-                              Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Progress',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                  
-                      Text(
-                        'Lihat kemajuan kompetensi dan pencapaian \n'
-                        'belajarmu. ',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                              ),
-                  
-                              Spacer(),
-                  
-                              Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.blue,
-                  size: 20,
-                              ),
-                    ],
-                  ),
-
-                  Divider(color: Colors.grey),
-
-                  Row(
-                    children: [
-                    CircleAvatar(
-                  radius: 25,
-                  backgroundColor: const Color.fromARGB(50, 64, 195, 255),
-                  child: Icon(
-                    Icons.warning_amber,
-                    color: Colors.lightBlue,
-                    size: 30,
-                  )
-                              ),
-                  
-                              Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Catatan sikap',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                  
-                      Text(
-                        'Lihat catatan sikap dan perilaku dari guru. ',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                              ),
-                  
-                              Spacer(),
-                  
-                              Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.blue,
-                  size: 20,
-                              ),
-                    ],
-                  ),
-                ],
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black)),
+                    Text(
+                      'Catat dan pantau kegiatan pembiasaan harianmu',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              Spacer(),
+              Icon(Icons.arrow_forward_ios_rounded,
+                  color: Colors.blue, size: 20),
+            ],
+          ),
+        ),
+      ),
+
+      Divider(color: Colors.grey),
+
+      // ================= PERMINTAAN SAKSI =================
+      GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.pushNamed(context, '/permintaan_saksi'),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: Color.fromARGB(50, 64, 195, 255),
+                child: Icon(Icons.person_outline_rounded,
+                    color: Colors.lightBlue, size: 30),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Permintaan Saksi',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black)),
+                    Text(
+                      'Lihat teman yang mengajukan permintaan saksi.',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Icon(Icons.arrow_forward_ios_rounded,
+                  color: Colors.blue, size: 20),
+            ],
+          ),
+        ),
+      ),
+
+      Divider(color: Colors.grey),
+
+      // ================= PROGRESS =================
+      GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.pushNamed(context, '/progress'),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: Color.fromARGB(50, 64, 195, 255),
+                child: Icon(Icons.insights_outlined,
+                    color: Colors.lightBlue, size: 30),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Progress',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black)),
+                    Text(
+                      'Lihat kemajuan kompetensi dan pencapaian\nbelajarmu.',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Icon(Icons.arrow_forward_ios_rounded,
+                  color: Colors.blue, size: 20),
+            ],
+          ),
+        ),
+      ),
+
+      Divider(color: Colors.grey),
+
+      // ================= CATATAN SIKAP =================
+      GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.pushNamed(context, '/catatan_sikap'),
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 25,
+                backgroundColor: Color.fromARGB(50, 64, 195, 255),
+                child: Icon(Icons.warning_amber,
+                    color: Colors.lightBlue, size: 30),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Catatan sikap',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black)),
+                    Text(
+                      'Lihat catatan sikap dan perilaku dari guru.',
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              Spacer(),
+              Icon(Icons.arrow_forward_ios_rounded,
+                  color: Colors.blue, size: 20),
+            ],
+          ),
+        ),
+      ),
+    ],
+  ),
+),
+
 
             SizedBox(height: 40),
 

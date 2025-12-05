@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Widgets/custom_appbar.dart';
 
 class ReadonlyInput extends StatefulWidget {
   final String value;
@@ -56,52 +57,7 @@ class SettingAccount extends StatelessWidget {
         ),
       ],
     ),
-    child:  AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            Padding(padding: EdgeInsetsGeometry.all(10)),
-            Icon(Icons.home_outlined, color: Colors.black87),
-            SizedBox(width: 12),
-
-            Spacer(),
-
-            // Name + Class
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Name',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                  ),
-                ),
-
-                Text(
-                  'PPLG XII-3',
-                  style:
-                  TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey[600],
-                  ),
-                )
-              ],
-            ),
-
-            SizedBox(width: 10),
-
-            CircleAvatar(
-              radius: 18,
-              backgroundColor: Colors.red,
-              backgroundImage: AssetImage('assets/images/profile_2.jpg'),
-            ),
-          ],
-        ),
-      ),
+    child:   CustomAppBar(),
   ),
 ),
 

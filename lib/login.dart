@@ -134,7 +134,9 @@ class Login extends StatelessWidget {
                                   SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, '/dashboard');
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.blue[900],
                                         shape: RoundedRectangleBorder(
@@ -143,7 +145,7 @@ class Login extends StatelessWidget {
                                         padding: EdgeInsets.symmetric(vertical: 16), // biar lebih enak dilihat
                                       ),
                                       child: Text(
-                                        'Simpan Perubahan',
+                                        'Login',
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ),

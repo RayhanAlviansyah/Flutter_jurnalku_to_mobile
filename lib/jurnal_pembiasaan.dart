@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Widgets/custom_appbar.dart';
 
 class JurnalPembiasaan extends StatefulWidget {
   const JurnalPembiasaan({super.key});
@@ -51,46 +52,7 @@ class _JurnalPembiasaanState extends State<JurnalPembiasaan> {
               ),
             ],
           ),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            title: Row(
-              children: [
-                Padding(padding: EdgeInsets.all(10)),
-                Icon(Icons.home_outlined, color: Colors.black87),
-                SizedBox(width: 12),
-                Spacer(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Name',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      'PPLG XII-3',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey[600],
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(width: 10),
-                CircleAvatar(
-                  radius: 18,
-                  backgroundImage: AssetImage('assets/images/profile_2.jpg'),
-                ),
-                SizedBox(width: 5),
-                Icon(Icons.arrow_drop_down),
-              ],
-            ),
-          ),
+          child: CustomAppBar(),
         ),
       ),
       body: CustomScrollView(
@@ -219,9 +181,19 @@ class _JurnalPembiasaanState extends State<JurnalPembiasaan> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('B. Pekerjaan yang dilakukan',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Row(
+                    children: [
+                      Text('B. Pekerjaan yang dilakukan',
+                          style:
+                              TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+
+                      Spacer(),
+                              IconButton(onPressed: (){
+                                Navigator.pushNamed(context, '/pembiasaan_more');
+                              }, 
+                              icon:Icon(Icons.more_horiz, color: Colors.grey, size: 25),)
+                    ],
+                  ),
                   SizedBox(height: 10),
                   pekerjaanList.isEmpty
                       ? _buildEmptyTable(['Pekerjaan', 'Tgl', 'Saksi'],
@@ -285,9 +257,20 @@ class _JurnalPembiasaanState extends State<JurnalPembiasaan> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('C. Materi yang dipelajari',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Row(
+                    children: [
+                      Text('C. Materi yang dipelajari',
+                          style:
+                              TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+
+                              Spacer(),
+                      Spacer(),
+                              IconButton(onPressed: (){
+                                Navigator.pushNamed(context, '/pembiasaan_more');
+                              }, 
+                              icon:Icon(Icons.more_horiz, color: Colors.grey, size: 25),)
+                    ],
+                  ),
                   SizedBox(height: 10),
                   MateriList.isEmpty
                       ? _buildEmptyTable(['Materi', 'STS', 'TGL'],
