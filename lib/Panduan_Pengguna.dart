@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:projek_jurnalku_to_mobile/detail_kelengkapanprofile.dart';
+import 'package:projek_jurnalku_to_mobile/detail_mengelolaforto.dart';
+import 'package:projek_jurnalku_to_mobile/detail_mengisijurnal.dart';
+import 'package:projek_jurnalku_to_mobile/detail_mengelolaserti.dart';
+import 'package:projek_jurnalku_to_mobile/detail_ubahpassword.dart';
+import 'package:projek_jurnalku_to_mobile/detail_unggahprofile.dart';
 
 class PanduanPage extends StatelessWidget {
-  const PanduanPage({super.key});
+  PanduanPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +41,14 @@ class PanduanPage extends StatelessWidget {
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(1),
-          child: Container(
-            color: Colors.grey, // warna garis
-            height: 1, // ketebalan garis
-          ),
+          child: Container(color: Colors.grey, height: 1),
         ),
       ),
 
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Container(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Color(0xFFF1F3F7),
             borderRadius: BorderRadius.circular(16),
@@ -54,7 +57,7 @@ class PanduanPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                children: const [
+                children: [
                   Icon(Icons.menu_book, size: 28, color: Colors.blue),
                   SizedBox(width: 8),
                   Text(
@@ -66,7 +69,7 @@ class PanduanPage extends StatelessWidget {
 
               SizedBox(height: 10),
               // Deskripsi
-              const Text(
+              Text(
                 "Selamat datang di panduan penggunaan aplikasi Jurnalku. "
                 "Panduan ini akan membantu Anda memahami cara menggunakan "
                 "fitur-fitur yang tersedia dengan optimal.",
@@ -82,20 +85,25 @@ class PanduanPage extends StatelessWidget {
                 "Umum",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Divider(
-                color: Colors.grey,
-                thickness: 1),
+              Divider(color: Colors.grey, thickness: 1),
               SizedBox(height: 12),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DetailUnggahprofile(),
+                    ),
+                  );
+                },
                 child: Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    children: const [
+                    children: [
                       Icon(
                         Icons.file_upload_outlined,
                         size: 30,
@@ -130,18 +138,19 @@ class PanduanPage extends StatelessWidget {
               ),
               SizedBox(height: 12),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DetailUbahpassword(),));
+                },
                 child: Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    children: const [
-                      Icon(Icons.lock_outline,
-                      size: 30, 
-                      color: Colors.blue),
+                    children: [
+                      Icon(Icons.lock_outline, size: 30, color: Colors.blue),
                       SizedBox(width: 16),
                       Expanded(
                         child: Column(
@@ -171,25 +180,26 @@ class PanduanPage extends StatelessWidget {
               ),
 
               //========= UNTUK SISWA =========
-              SizedBox(height: 25,),
+              SizedBox(height: 25),
               Text(
                 "Untuk Siswa",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              Divider(
-                color: Colors.grey,
-                thickness: 1),
+              Divider(color: Colors.grey, thickness: 1),
               SizedBox(height: 12),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DetailMengisijurnal(),));
+                },
                 child: Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    children:  [
+                    children: [
                       Icon(
                         Icons.note_alt_outlined,
                         size: 30,
@@ -224,18 +234,23 @@ class PanduanPage extends StatelessWidget {
               ),
               SizedBox(height: 12),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DetailKelengkapanprofile(),));
+                },
                 child: Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    children: const [
-                      Icon(Icons.manage_accounts_outlined,
-                      size: 30, 
-                      color: Colors.blue),
+                    children: [
+                      Icon(
+                        Icons.manage_accounts_outlined,
+                        size: 30,
+                        color: Colors.blue,
+                      ),
                       SizedBox(width: 16),
                       Expanded(
                         child: Column(
@@ -265,20 +280,19 @@ class PanduanPage extends StatelessWidget {
               ),
               SizedBox(height: 12),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, 
+                  MaterialPageRoute(builder: (context) => DetailMengelolaforto(),));
+                },
                 child: Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    children:  [
-                      Icon(
-                        Icons.folder_open,
-                        size: 30,
-                        color: Colors.blue,
-                      ),
+                    children: [
+                      Icon(Icons.folder_open, size: 30, color: Colors.blue),
                       SizedBox(width: 16),
                       Expanded(
                         child: Column(
@@ -308,15 +322,18 @@ class PanduanPage extends StatelessWidget {
               ),
               SizedBox(height: 12),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DetailMengelolaserti(),));
+                },
                 child: Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    children:  [
+                    children: [
                       Icon(
                         Icons.verified_outlined,
                         size: 30,
@@ -353,13 +370,13 @@ class PanduanPage extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
-                    children:  [
+                    children: [
                       Icon(
                         Icons.sticky_note_2_outlined,
                         size: 30,
