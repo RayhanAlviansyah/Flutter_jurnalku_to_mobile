@@ -10,9 +10,11 @@ class Explore extends StatefulWidget {
 }
 
 class _ExploreState extends State<Explore> {
+  final TextEditingController searchController = TextEditingController();
+
   List<Map<String, dynamic>> students = [
     {
-      "name": "King ",
+      "name": "King",
       "info": "12309677 | PPLG XII-3 | Taj 5",
       "portfolio": 1,
       "sertifikat": 13,
@@ -26,13 +28,68 @@ class _ExploreState extends State<Explore> {
       "img": "https://i.pravatar.cc/150?img=29",
     },
     {
-      "name": "King",
+      "name": "Alex",
       "info": "12309480 | PPLG XII-3 | Cic 8",
       "portfolio": 3,
       "sertifikat": 6,
-      "img": "https://i.pravatar.cc/150?img=29",
+      "img": "https://i.pravatar.cc/150?img=30",
+    },
+    {
+      "name": "John Doe",
+      "info": "12309481 | PPLG XII-3 | Taj 2",
+      "portfolio": 5,
+      "sertifikat": 10,
+      "img": "https://i.pravatar.cc/150?img=31",
+    },
+    {
+      "name": "Jane Smith",
+      "info": "12309482 | PPLG XII-1 | Cis 1",
+      "portfolio": 2,
+      "sertifikat": 4,
+      "img": "https://i.pravatar.cc/150?img=32",
     },
   ];
+
+  late List<Map<String, dynamic>> filteredStudents;
+
+  @override
+  void initState() {
+    super.initState();
+    filteredStudents = List.from(students);
+    searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    searchController.removeListener(_onSearchChanged);
+    searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    searchStudent(searchController.text);
+  }
+
+  void searchStudent(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        filteredStudents = List.from(students);
+      } else {
+        filteredStudents = students.where((student) {
+          final name = student["name"].toString().toLowerCase();
+          final info = student["info"].toString().toLowerCase();
+          final search = query.toLowerCase();
+
+          return name.contains(search) || info.contains(search);
+        }).toList();
+      }
+    });
+  }
+
+  void clearSearch() {
+    searchController.clear();
+    searchStudent('');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +139,7 @@ class _ExploreState extends State<Explore> {
               ),
             ),
 
+            // Banner dengan blur
             Stack(
               children: [
                 SizedBox(
@@ -100,7 +158,7 @@ class _ExploreState extends State<Explore> {
                   left: 20,
                   bottom: 60,
                   child: Text(
-                    "Direktori  Siswa",
+                    "Direktori Siswa",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -119,6 +177,7 @@ class _ExploreState extends State<Explore> {
               ],
             ),
 
+            // Search box
             Transform.translate(
               offset: const Offset(0, -35),
               child: Container(
@@ -151,22 +210,37 @@ class _ExploreState extends State<Explore> {
                               border: Border.all(color: Colors.grey.shade300),
                               color: Colors.white,
                             ),
-                            child: const TextField(
+                            child: TextField(
+                              controller: searchController,
                               decoration: InputDecoration(
-                                hintText:
-                                    "Cari nama siswa, NIS, atau rombel...",
+                                hintText: "Cari nama siswa, NIS, atau rombel...",
                                 border: InputBorder.none,
-                                prefixIcon: Icon(
+                                prefixIcon: const Icon(
                                   Icons.search,
                                   color: Colors.grey,
                                 ),
+                                suffixIcon: searchController.text.isNotEmpty
+                                    ? IconButton(
+                                        icon: const Icon(
+                                          Icons.clear,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: clearSearch,
+                                      )
+                                    : null,
                               ),
+                              onChanged: (value) {
+                                searchStudent(value);
+                              },
                             ),
                           ),
                         ),
                         const SizedBox(width: 10),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Tambahkan logika pencarian tambahan jika perlu
+                            searchStudent(searchController.text);
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF0A4DA2),
                             padding: const EdgeInsets.symmetric(
@@ -216,12 +290,13 @@ class _ExploreState extends State<Explore> {
 
             const SizedBox(height: 0),
 
+            // Info jumlah siswa yang ditampilkan
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Menampilkan 1 - 12 dari 538 siswa",
+                  "Menampilkan ${filteredStudents.length} dari ${students.length} siswa${searchController.text.isNotEmpty ? ' (Hasil pencarian: "${searchController.text}")' : ''}",
                   style: TextStyle(color: Colors.grey.shade700),
                 ),
               ),
@@ -229,137 +304,172 @@ class _ExploreState extends State<Explore> {
 
             const SizedBox(height: 10),
 
-            // siswa list
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: students.length,
-              itemBuilder: (context, index) {
-                final s = students[index];
-
-                return Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  padding: const EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color.fromARGB(
-                          31,
-                          55,
-                          22,
-                          161,
-                        ).withOpacity(0.06),
-                        blurRadius: 8,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 32,
-                            backgroundImage:
-                                s["img"].toString().startsWith("http")
-                                ? NetworkImage(s["img"])
-                                : AssetImage("assets/images/${s["img"]}")
-                                      as ImageProvider,
+            // List siswa dengan search filter
+            filteredStudents.isEmpty
+                ? Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.search_off,
+                          size: 60,
+                          color: Colors.grey.shade400,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'Tidak ditemukan siswa dengan kata kunci "${searchController.text}"',
+                          style: TextStyle(
+                            color: Colors.grey.shade600,
+                            fontSize: 16,
                           ),
-                          const SizedBox(width: 15),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                s["name"],
-                                style: const TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                s["info"],
-                                style: const TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.folder_outlined,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          const SizedBox(width: 6),
-                          Text("${s["portfolio"]} Portfolio"),
-                          const SizedBox(width: 20),
-                          const Icon(
-                            Icons.verified_outlined,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          const SizedBox(width: 6),
-                          Text("${s["sertifikat"]} Sertifikat"),
-                        ],
-                      ),
-
-                      const SizedBox(height: 15),
-
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {},
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 8),
+                        ElevatedButton(
+                          onPressed: clearSearch,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                              255,
-                              39,
-                              19,
-                              170,
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            backgroundColor: const Color(0xFF0A4DA2),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Lihat Detail",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              SizedBox(width: 8),
-                              Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                            ],
+                          child: const Text(
+                            'Tampilkan Semua',
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: filteredStudents.length,
+                    itemBuilder: (context, index) {
+                      final s = filteredStudents[index];
+
+                      return Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        padding: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(31, 55, 22, 161)
+                                  .withOpacity(0.06),
+                              blurRadius: 8,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 32,
+                                  backgroundImage:
+                                      s["img"].toString().startsWith("http")
+                                          ? NetworkImage(s["img"])
+                                          : AssetImage(
+                                                  "assets/images/${s["img"]}")
+                                              as ImageProvider,
+                                ),
+                                const SizedBox(width: 15),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        s["name"],
+                                        style: const TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        s["info"],
+                                        style: const TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 10),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.folder_outlined,
+                                  size: 18,
+                                  color: Colors.grey,
+                                ),
+                                const SizedBox(width: 6),
+                                Text("${s["portfolio"]} Portfolio"),
+                                const SizedBox(width: 20),
+                                const Icon(
+                                  Icons.verified_outlined,
+                                  size: 18,
+                                  color: Colors.grey,
+                                ),
+                                const SizedBox(width: 6),
+                                Text("${s["sertifikat"]} Sertifikat"),
+                              ],
+                            ),
+
+                            const SizedBox(height: 15),
+
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 39, 19, 170),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 14),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: const Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Lihat Detail",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    SizedBox(width: 8),
+                                    Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.white,
+                                      size: 18,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-            SizedBox(height: 10),
+
+            // Pagination (disesuaikan dengan filteredStudents)
+            const SizedBox(height: 10),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -369,7 +479,7 @@ class _ExploreState extends State<Explore> {
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.black,
                       side: BorderSide(color: Colors.grey.shade300),
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 12,
                       ),
@@ -377,7 +487,7 @@ class _ExploreState extends State<Explore> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: Text("Previous"),
+                    child: const Text("Previous"),
                   ),
                   ElevatedButton(
                     onPressed: () {},
@@ -385,7 +495,7 @@ class _ExploreState extends State<Explore> {
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.black,
                       side: BorderSide(color: Colors.grey.shade300),
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 12,
                       ),
@@ -393,7 +503,7 @@ class _ExploreState extends State<Explore> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Next",
                       style: TextStyle(
                         color: Colors.black,
@@ -404,12 +514,14 @@ class _ExploreState extends State<Explore> {
                 ],
               ),
             ),
+
+            // Footer
             const SizedBox(height: 30),
             Container(
-              margin: EdgeInsets.only(top: 40),
+              margin: const EdgeInsets.only(top: 40),
               width: double.infinity,
               color: const Color(0xFF0A4DA2),
-              padding: EdgeInsets.symmetric(horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
                   Row(
@@ -420,19 +532,19 @@ class _ExploreState extends State<Explore> {
                         color: Colors.white,
                         size: 15,
                       ),
-                      SizedBox(width: 15),
+                      const SizedBox(width: 15),
                       FaIcon(
                         FontAwesomeIcons.instagram,
                         color: Colors.white,
                         size: 15,
                       ),
-                      SizedBox(width: 15),
+                      const SizedBox(width: 15),
                       FaIcon(
                         FontAwesomeIcons.linkedinIn,
                         color: Colors.white,
                         size: 15,
                       ),
-                      SizedBox(width: 15),
+                      const SizedBox(width: 15),
                       FaIcon(
                         FontAwesomeIcons.youtube,
                         color: Colors.white,
@@ -440,8 +552,8 @@ class _ExploreState extends State<Explore> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5),
-                  Text(
+                  const SizedBox(height: 5),
+                  const Text(
                     "© 2024 SMK Wikrama Bogor. All rights reserved.",
                     style: TextStyle(color: Colors.white70, fontSize: 12),
                   ),
