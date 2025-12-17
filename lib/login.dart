@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'widgets/floating_button.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -493,6 +494,8 @@ class Login extends StatelessWidget {
           ),
         ),
       ),
+        floatingActionButton: FloatingButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

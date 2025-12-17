@@ -9,6 +9,7 @@ import 'package:projek_jurnalku_to_mobile/setting_account.dart';
 import 'package:projek_jurnalku_to_mobile/dashboard.dart';
 import 'package:projek_jurnalku_to_mobile/explore.dart';
 import 'package:projek_jurnalku_to_mobile/profile.dart';
+import 'package:projek_jurnalku_to_mobile/explore_no_login.dart';
 import 'package:projek_jurnalku_to_mobile/catatan_sikap.dart';
 import 'package:projek_jurnalku_to_mobile/detail_kelengkapanprofile.dart';
 import 'package:projek_jurnalku_to_mobile/detail_mengelolaforto.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Login(),
         '/dashboard': (context) => Dashboard(),
         '/explore': (context) => Explore(),
+        '/explore_no_login': (context) => ExploreNoLogin(),
         '/profile': (context) => Profile(),
         '/progress': (context) => ProgressPage(),
         '/setting_account': (context) => SettingAccount(),

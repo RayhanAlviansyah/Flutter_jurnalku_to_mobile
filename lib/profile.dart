@@ -28,7 +28,9 @@ class Profile extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/dashboard');
+                        },
                         child: Text(
                           "Kembali",
                           style: TextStyle(color: Colors.white),

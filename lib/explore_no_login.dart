@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:ui';
 
-class Explore extends StatefulWidget {
-  const Explore({super.key});
+class ExploreNoLogin extends StatefulWidget {
+  const ExploreNoLogin({super.key});
 
   @override
-  State<Explore> createState() => _ExploreState();
+  State<ExploreNoLogin> createState() => _ExploreNoLoginState();
 }
 
-class _ExploreState extends State<Explore> {
+class _ExploreNoLoginState extends State<ExploreNoLogin> {
   final TextEditingController searchController = TextEditingController();
 
   List<Map<String, dynamic>> students = [
@@ -120,7 +120,7 @@ class _ExploreState extends State<Explore> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/dashboard');
+                      Navigator.pushNamed(context, '/');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0A4DA2),
@@ -133,7 +133,7 @@ class _ExploreState extends State<Explore> {
                       ),
                     ),
                     child: const Text(
-                      "Dashboard",
+                      "Login",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
