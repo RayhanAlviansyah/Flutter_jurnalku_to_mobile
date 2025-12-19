@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:projek_jurnalku_to_mobile/detail_kelengkapanprofile.dart';
-import 'package:projek_jurnalku_to_mobile/detail_mengelolaforto.dart';
-import 'package:projek_jurnalku_to_mobile/detail_mengisijurnal.dart';
-import 'package:projek_jurnalku_to_mobile/detail_mengelolaserti.dart';
-import 'package:projek_jurnalku_to_mobile/detail_ubahpassword.dart';
-import 'package:projek_jurnalku_to_mobile/detail_unggahprofile.dart';
-import 'Widgets/custom_appbar.dart';
+import 'package:projek_jurnalku_to_mobile/pages/detail_kelengkapanprofile.dart';
+import 'package:projek_jurnalku_to_mobile/pages/detail_mengelolaforto.dart';
+import 'package:projek_jurnalku_to_mobile/pages/detail_mengisijurnal.dart';
+import 'package:projek_jurnalku_to_mobile/pages/detail_mengelolaserti.dart';
+import 'package:projek_jurnalku_to_mobile/pages/detail_ubahpassword.dart';
+import 'package:projek_jurnalku_to_mobile/pages/detail_unggahprofile.dart';
+import '../Widgets/custom_appbar.dart';
 
 class PanduanPage extends StatelessWidget {
   PanduanPage({super.key});

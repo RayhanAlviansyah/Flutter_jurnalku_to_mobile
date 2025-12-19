@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projek_jurnalku_to_mobile/Panduan_Pengguna.dart';
-import 'Widgets/custom_appbar.dart';
+import 'package:projek_jurnalku_to_mobile/pages/Panduan_Pengguna.dart';
+import '../Widgets/custom_appbar.dart';
 
 class DetailMengelolaserti extends StatelessWidget {
   DetailMengelolaserti({super.key});

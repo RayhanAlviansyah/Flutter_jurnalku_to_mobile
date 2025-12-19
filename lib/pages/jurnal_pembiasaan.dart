@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Widgets/custom_appbar.dart';
+import '../Widgets/custom_appbar.dart';
 
 class JurnalPembiasaan extends StatefulWidget {
   const JurnalPembiasaan({super.key});

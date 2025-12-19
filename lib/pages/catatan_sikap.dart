@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Widgets/custom_appbar.dart';
+import '../Widgets/custom_appbar.dart';
 
 class Catatan extends StatefulWidget {
   const Catatan({super.key});
